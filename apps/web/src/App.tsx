@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { sessionScenes } from "@finsight-academy/shared";
 import type { SceneId } from '@finsight-academy/shared';
 
 
@@ -6,58 +7,45 @@ function App() {
 
   const [currentScene, setCurrentScene ] = useState<SceneId>('welcome');
 
+  const currentSceneData = sessionScenes.find(
+    (scene) => scene.id === currentScene,
+  );
+
+  if(!currentSceneData) {
+    return (
+      <main className="app-shell">
+        <section className="welcome-scene">
+          <p className="eyebrow">Session unavailable</p>
+          <h1>We could not find this learning scene.</h1>
+          <p className="intro">
+            This is a safe fallback for an invalid session state.
+          </p>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main className="app-shell">
-      {currentScene === 'welcome' && (
-        <section className="welcome-scene">
-          <p className="eyebrow">FinSight Academy</p>
-          <h1>Learn to think through market decisions calmly.</h1>
+      <section className="welcome-scene">
+        <p className="eyebrow">{currentSceneData.eyebrow}</p>
 
-          <p className="intro">
-            Enter a fictional market session where you will review a short
-            briefing, make one focused decision, and reflect on the reasoning
-            behind it.
-          </p>
-          <div className="notice">
-            <strong>Safe learning space:</strong> All assets, prices, and market
-            events are fictional. This is not investment advice.
-          </div>
+        <h1>{currentSceneData.title}</h1>
+
+        <p className="intro">{currentSceneData.body}</p>
+
+        <div className="notice">{currentSceneData.notice}</div>
+
+        {currentSceneData.nextSceneId && (
           <button
             type="button"
             className="primary-action"
-            onClick={() => setCurrentScene('market-briefing')}
+            onClick={() => setCurrentScene(currentSceneData.nextSceneId!)}
           >
-            Begin Session
+            {currentSceneData.primaryActionLabel}
           </button>
-        </section>
-      )}
-
-      {currentScene === 'market-briefing' && (
-        <section className="welcome-scene">
-          <p className="eyebrow">Market Briefing</p>
-
-          <h1>A quiet shift in the fictional energy sector.</h1>
-
-          <p className="intro">
-            In today's simulated session, renewable infrastructure companies
-            are seeing cautious interest after a fictional city announced a
-            long-term grid modernization plan.
-          </p>
-
-          <div className="notice">
-            The market reaction is uncertain. Some investors may see opportunity,
-            while others may worry that expectations are already too high.
-          </div>
-
-          <button
-            type="button"
-            className="primary-action"
-            onClick={() => setCurrentScene('welcome')}
-          >
-            Back to Welcome
-          </button>
-        </section>
-      )}
+        )}
+      </section>
     </main>
   );
 }
