@@ -1,4 +1,4 @@
-export type SceneId = 'welcome' | 'market-briefing' | 'portfolio-snapshot';
+export type SceneId = 'welcome' | 'market-briefing' | 'portfolio-snapshot' | 'decision';
 
 export type SessionScene = {
   id: SceneId;
@@ -38,7 +38,17 @@ export const sessionScenes: SessionScene[] = [
     body: 'Your session starts with no holdings and a simple choice ahead. The goal is not to maximize returns, but to notice how you weigh uncertainty, opportunity, and patience.',
     notice:
         'Learning credits are fictional. They exist only to make the decision feel concrete without using real money.',
-    primaryActionLabel: 'Back to Briefing',
-    nextSceneId: 'market-briefing',
+    primaryActionLabel: 'Consider Your Decision',
+    nextSceneId: 'decision',
+  },
+  {
+    id: 'decision',
+    eyebrow: 'Decision Moment',
+    title: 'How would you respond to the fictional energy shift?',
+    body: 'Aurora Gridworks is a fictional renewable infrastructure company mentioned in today’s briefing. You are not trying to predict the future perfectly. You are practicing how to make a calm decision with incomplete information.',
+    notice:
+        'In the next step, you will choose whether to buy a small position, hold your cash, or wait for more clarity.',
+    primaryActionLabel: 'Back to Portfolio Snapshot',
+    nextSceneId: 'portfolio-snapshot',
   },
 ];
