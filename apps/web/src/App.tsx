@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { sessionScenes } from "@finsight-academy/shared";
+import { SessionSceneView } from './components/SessionSceneView';
 import type { SceneId } from '@finsight-academy/shared';
 
 
@@ -25,31 +26,14 @@ function App() {
     );
   }
 
-  const nextSceneId = currentSceneData.nextSceneId;
-
 return (
-  <main className="app-shell">
-    <section className="welcome-scene">
-      <p className="eyebrow">{currentSceneData.eyebrow}</p>
-
-      <h1>{currentSceneData.title}</h1>
-
-      <p className="intro">{currentSceneData.body}</p>
-
-      <div className="notice">{currentSceneData.notice}</div>
-
-      {nextSceneId ? (
-        <button
-          type="button"
-          className="primary-action"
-          onClick={() => setCurrentScene(nextSceneId)}
-        >
-          {currentSceneData.primaryActionLabel}
-        </button>
-      ) : null}
-    </section>
-  </main>
-);
+    <main className="app-shell">
+      <SessionSceneView
+        scene={currentSceneData}
+        onNavigate={setCurrentScene}
+      />
+    </main>
+  );
 }
 
 export default App;

@@ -1,4 +1,4 @@
-export type SceneId = 'welcome' | 'market-briefing';
+export type SceneId = 'welcome' | 'market-briefing' | 'portfolio-snapshot';
 
 export type SessionScene = {
   id: SceneId;
@@ -28,7 +28,17 @@ export const sessionScenes: SessionScene[] = [
     body: "In today's simulated session, renewable infrastructure companies are seeing cautious interest after a fictional city announced a long-term grid modernization plan.",
     notice:
       'The market reaction is uncertain. Some investors may see opportunity, while others may worry that expectations are already too high.',
-    primaryActionLabel: 'Back to Welcome',
-    nextSceneId: 'welcome',
+    primaryActionLabel: 'Review Starting Portfolio',
+    nextSceneId: 'portfolio-snapshot',
+  },
+  {
+    id: 'portfolio-snapshot',
+    eyebrow: 'Portfolio Snapshot',
+    title: 'You begin with 1,000 learning credits in virtual cash.',
+    body: 'Your session starts with no holdings and a simple choice ahead. The goal is not to maximize returns, but to notice how you weigh uncertainty, opportunity, and patience.',
+    notice:
+        'Learning credits are fictional. They exist only to make the decision feel concrete without using real money.',
+    primaryActionLabel: 'Back to Briefing',
+    nextSceneId: 'market-briefing',
   },
 ];

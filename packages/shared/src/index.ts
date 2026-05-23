@@ -1,2 +1,2 @@
-export type { SceneId } from './session';
+export type { SceneId, SessionScene} from './session';
 export { sessionScenes } from './session';
