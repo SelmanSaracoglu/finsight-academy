@@ -25,29 +25,31 @@ function App() {
     );
   }
 
-  return (
-    <main className="app-shell">
-      <section className="welcome-scene">
-        <p className="eyebrow">{currentSceneData.eyebrow}</p>
+  const nextSceneId = currentSceneData.nextSceneId;
 
-        <h1>{currentSceneData.title}</h1>
+return (
+  <main className="app-shell">
+    <section className="welcome-scene">
+      <p className="eyebrow">{currentSceneData.eyebrow}</p>
 
-        <p className="intro">{currentSceneData.body}</p>
+      <h1>{currentSceneData.title}</h1>
 
-        <div className="notice">{currentSceneData.notice}</div>
+      <p className="intro">{currentSceneData.body}</p>
 
-        {currentSceneData.nextSceneId && (
-          <button
-            type="button"
-            className="primary-action"
-            onClick={() => setCurrentScene(currentSceneData.nextSceneId!)}
-          >
-            {currentSceneData.primaryActionLabel}
-          </button>
-        )}
-      </section>
-    </main>
-  );
+      <div className="notice">{currentSceneData.notice}</div>
+
+      {nextSceneId ? (
+        <button
+          type="button"
+          className="primary-action"
+          onClick={() => setCurrentScene(nextSceneId)}
+        >
+          {currentSceneData.primaryActionLabel}
+        </button>
+      ) : null}
+    </section>
+  </main>
+);
 }
 
 export default App;
