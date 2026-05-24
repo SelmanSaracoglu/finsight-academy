@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { sessionScenes } from "@finsight-academy/shared";
 import { SessionSceneView } from './components/SessionSceneView';
+import { DecisionOptions  } from "./components/DecisionOptions";
+
 import type { SceneId } from '@finsight-academy/shared';
+import type { DecisionChoice } from './components/DecisionOptions';
 
 
 function App() {
 
   const [currentScene, setCurrentScene ] = useState<SceneId>('welcome');
+  const [selectedDecision, setSelectedDecision] =
+  useState<DecisionChoice | null>(null);
 
   const currentSceneData = sessionScenes.find(
     (scene) => scene.id === currentScene,
@@ -28,10 +33,14 @@ function App() {
 
 return (
     <main className="app-shell">
-      <SessionSceneView
-        scene={currentSceneData}
-        onNavigate={setCurrentScene}
-      />
+      <SessionSceneView scene={currentSceneData} onNavigate={setCurrentScene} />
+
+      {currentScene === 'decision' ? (
+        <DecisionOptions
+          selectedChoice={selectedDecision}
+          onSelectChoice={setSelectedDecision}
+        />
+      ) : null}
     </main>
   );
 }
