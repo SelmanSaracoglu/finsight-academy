@@ -1,5 +1,5 @@
 export type { SceneId, SessionScene } from './session';
-export { sessionScenes } from './session';
+export { getSceneProgress, sessionScenes } from './session';
 
 export type { DecisionChoice, DecisionOption } from './decision';
 export {

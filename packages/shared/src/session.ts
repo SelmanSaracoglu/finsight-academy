@@ -89,3 +89,15 @@ export const sessionScenes: SessionScene[] = [
     nextSceneId: 'welcome',
   },
 ];
+
+export function getSceneProgress(sceneId: SceneId): {
+  currentStep: number;
+  totalSteps: number;
+} {
+  const sceneIndex = sessionScenes.findIndex((scene) => scene.id === sceneId);
+
+  return {
+    currentStep: sceneIndex === -1 ? 1 : sceneIndex + 1,
+    totalSteps: sessionScenes.length,
+  };
+}

@@ -36,11 +36,18 @@ function App() {
   const isDecisionScene = currentScene === 'decision';
   const isPrimaryActionDisabled = isDecisionScene && !selectedDecision;
 
+  function handleNavigate(sceneId: SceneId) {
+    if (sceneId === 'welcome') {
+      setSelectedDecision(null);
+    }
+    setCurrentScene(sceneId);
+  }
+
   return (
     <main className="app-shell">
       <SessionSceneView
         scene={currentSceneData}
-        onNavigate={setCurrentScene}
+        onNavigate={handleNavigate}
         isPrimaryActionDisabled={isPrimaryActionDisabled}
         disabledActionHint="Choose one response before continuing to reflection."
       />

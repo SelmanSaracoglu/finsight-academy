@@ -1,4 +1,5 @@
 import type { SceneId, SessionScene } from '@finsight-academy/shared';
+import { getSceneProgress } from '@finsight-academy/shared';
 
 type SessionSceneViewProps = {
   scene: SessionScene;
@@ -14,9 +15,13 @@ export function SessionSceneView({
   disabledActionHint,
 }: SessionSceneViewProps) {
   const nextSceneId = scene.nextSceneId;
+  const progress = getSceneProgress(scene.id);
 
   return (
     <section className="welcome-scene">
+      <p className="scene-progress">
+        Scene {progress.currentStep} of {progress.totalSteps}
+      </p>
       <p className="eyebrow">{scene.eyebrow}</p>
 
       <h1>{scene.title}</h1>
