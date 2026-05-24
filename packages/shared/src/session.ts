@@ -1,4 +1,9 @@
-export type SceneId = 'welcome' | 'market-briefing' | 'portfolio-snapshot' | 'decision';
+export type SceneId =
+  | 'welcome'
+  | 'market-briefing'
+  | 'portfolio-snapshot'
+  | 'decision'
+  | 'reflection';
 
 export type SessionScene = {
   id: SceneId;
@@ -47,8 +52,18 @@ export const sessionScenes: SessionScene[] = [
     title: 'How would you respond to the fictional energy shift?',
     body: 'Aurora Gridworks is a fictional renewable infrastructure company mentioned in today’s briefing. You are not trying to predict the future perfectly. You are practicing how to make a calm decision with incomplete information.',
     notice:
-        'In the next step, you will choose whether to buy a small position, hold your cash, or wait for more clarity.',
-    primaryActionLabel: 'Back to Portfolio Snapshot',
-    nextSceneId: 'portfolio-snapshot',
+      'Choose whether to buy a small position, hold your cash, or wait for more clarity. Your reasoning matters more than the outcome.',
+    primaryActionLabel: 'Continue to Reflection',
+    nextSceneId: 'reflection',
+  },
+  {
+    id: 'reflection',
+    eyebrow: 'Reflection',
+    title: 'Your decision reveals how you respond to uncertainty.',
+    body: 'There is no perfect answer in this fictional session. The useful question is whether your choice matched your risk comfort, available information, and emotional state.',
+    notice:
+      'Good investing behavior is not about always being right. It is about understanding why you acted and what trade-offs you accepted.',
+    primaryActionLabel: 'Back to Decision',
+    nextSceneId: 'decision',
   },
 ];

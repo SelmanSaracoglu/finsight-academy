@@ -107,3 +107,29 @@ h1 {
   color: #526070;
   line-height: 1.5;
 }
+
+.reflection-card {
+  width: min(100%, 760px);
+  margin-top: 18px;
+  padding: 22px 24px;
+  border: 1px solid rgba(82, 96, 112, 0.16);
+  border-radius: 20px;
+  background: rgba(255, 252, 247, 0.78);
+  box-shadow: 0 16px 40px rgba(36, 48, 64, 0.08);
+}
+
+.reflection-label {
+  margin: 0 0 8px;
+  color: #6f7d8c;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reflection-text {
+  margin: 0;
+  color: #435061;
+  font-size: 1rem;
+  line-height: 1.65;
+}

@@ -57,4 +57,20 @@ export function DecisionOptions({
   );
 }
 
+export function getDecisionReflection(choice: DecisionChoice | null): string {
+  if (choice === 'buy-small') {
+    return 'You leaned toward opportunity, but kept the position modest. This suggests you were willing to act under uncertainty while still managing exposure.';
+  }
+
+  if (choice === 'hold-cash') {
+    return 'You prioritized flexibility. Holding cash can be a calm decision when the situation feels uncertain or expectations may already be priced in.';
+  }
+
+  if (choice === 'wait') {
+    return 'You preferred more evidence before acting. Waiting can reduce impulsive decisions, though it may also mean missing an early move.';
+  }
+
+  return 'Choose a response in the Decision scene to see a reflection on your reasoning.';
+}
+
 export type { DecisionChoice};

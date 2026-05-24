@@ -3,11 +3,15 @@ import type { SceneId, SessionScene } from '@finsight-academy/shared';
 type SessionSceneViewProps = {
   scene: SessionScene;
   onNavigate: (sceneId: SceneId) => void;
+  isPrimaryActionDisabled?: boolean;
+  disabledActionHint?: string;
 };
 
 export function SessionSceneView({
   scene,
   onNavigate,
+  isPrimaryActionDisabled,
+  disabledActionHint,
 }: SessionSceneViewProps) {
   const nextSceneId = scene.nextSceneId;
 
@@ -22,13 +26,20 @@ export function SessionSceneView({
       <div className="notice">{scene.notice}</div>
 
       {nextSceneId ? (
-        <button
-          type="button"
-          className="primary-action"
-          onClick={() => onNavigate(nextSceneId)}
-        >
-          {scene.primaryActionLabel}
-        </button>
+        <>
+          <button
+            type="button"
+            className="primary-action"
+            disabled={isPrimaryActionDisabled}
+            onClick={() => onNavigate(nextSceneId)}
+          >
+            {scene.primaryActionLabel}
+          </button>
+
+          {isPrimaryActionDisabled && disabledActionHint ? (
+            <p className="action-hint">{disabledActionHint}</p>
+          ) : null}
+        </>
       ) : null}
     </section>
   );

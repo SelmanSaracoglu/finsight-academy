@@ -1,23 +1,21 @@
-import { useState } from "react";
-import { sessionScenes } from "@finsight-academy/shared";
+import { useState } from 'react';
+import { sessionScenes } from '@finsight-academy/shared';
 import { SessionSceneView } from './components/SessionSceneView';
-import { DecisionOptions  } from "./components/DecisionOptions";
+import { DecisionOptions, getDecisionReflection } from './components/DecisionOptions';
 
 import type { SceneId } from '@finsight-academy/shared';
 import type { DecisionChoice } from './components/DecisionOptions';
 
-
 function App() {
-
-  const [currentScene, setCurrentScene ] = useState<SceneId>('welcome');
+  const [currentScene, setCurrentScene] = useState<SceneId>('welcome');
   const [selectedDecision, setSelectedDecision] =
-  useState<DecisionChoice | null>(null);
+    useState<DecisionChoice | null>(null);
 
   const currentSceneData = sessionScenes.find(
     (scene) => scene.id === currentScene,
   );
 
-  if(!currentSceneData) {
+  if (!currentSceneData) {
     return (
       <main className="app-shell">
         <section className="welcome-scene">
@@ -31,16 +29,33 @@ function App() {
     );
   }
 
-return (
-    <main className="app-shell">
-      <SessionSceneView scene={currentSceneData} onNavigate={setCurrentScene} />
+  const isDecisionScene = currentScene === 'decision';
+  const isPrimaryActionDisabled = isDecisionScene && !selectedDecision;
 
-      {currentScene === 'decision' ? (
+  return (
+    <main className="app-shell">
+      <SessionSceneView
+        scene={currentSceneData}
+        onNavigate={setCurrentScene}
+        isPrimaryActionDisabled={isPrimaryActionDisabled}
+        disabledActionHint="Choose one response before continuing to reflection."
+      />
+
+      {isDecisionScene ? (
         <DecisionOptions
           selectedChoice={selectedDecision}
           onSelectChoice={setSelectedDecision}
         />
       ) : null}
+
+      {currentScene === 'reflection' ? (
+      <section className="reflection-card">
+        <p className="reflection-label">Your selected response</p>
+        <p className="reflection-text">
+          {getDecisionReflection(selectedDecision)}
+        </p>
+      </section>
+    ) : null}
     </main>
   );
 }
