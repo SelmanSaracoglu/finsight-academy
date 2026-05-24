@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { sessionScenes } from '@finsight-academy/shared';
+import { sessionScenes, getDecisionReflection } from '@finsight-academy/shared';
 import { SessionSceneView } from './components/SessionSceneView';
-import { DecisionOptions, getDecisionReflection } from './components/DecisionOptions';
+import { DecisionOptions } from './components/DecisionOptions';
 
-import type { SceneId } from '@finsight-academy/shared';
-import type { DecisionChoice } from './components/DecisionOptions';
+import type { DecisionChoice, SceneId } from '@finsight-academy/shared';
 
 function App() {
   const [currentScene, setCurrentScene] = useState<SceneId>('welcome');
