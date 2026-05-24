@@ -3,7 +3,9 @@ export type SceneId =
   | 'market-briefing'
   | 'portfolio-snapshot'
   | 'decision'
-  | 'reflection';
+  | 'reflection'
+  | 'market-reaction'
+  | 'lesson-summary';
 
 export type SessionScene = {
   id: SceneId;
@@ -63,7 +65,27 @@ export const sessionScenes: SessionScene[] = [
     body: 'There is no perfect answer in this fictional session. The useful question is whether your choice matched your risk comfort, available information, and emotional state.',
     notice:
       'Good investing behavior is not about always being right. It is about understanding why you acted and what trade-offs you accepted.',
-    primaryActionLabel: 'Back to Decision',
-    nextSceneId: 'decision',
+    primaryActionLabel: 'See Market Reaction',
+    nextSceneId: 'market-reaction',
+  },
+  {
+    id: 'market-reaction',
+    eyebrow: 'Market Reaction',
+    title: 'The fictional market responded in an unexpected way.',
+    body: 'After your decision, new fictional commentary changed how investors interpreted the energy announcement. The reaction was not fully predictable, which is part of the lesson.',
+    notice:
+      'Market outcomes can differ from your reasoning. A thoughtful decision can still have an uncomfortable result, and a lucky result does not always mean the reasoning was strong.',
+    primaryActionLabel: 'Review Lesson Summary',
+    nextSceneId: 'lesson-summary',
+  },
+  {
+    id: 'lesson-summary',
+    eyebrow: 'Lesson Summary',
+    title: 'You completed a calm market decision practice session.',
+    body: 'In this fictional session, you reviewed a market briefing, considered uncertainty, made one focused decision, and reflected on the reasoning behind it.',
+    notice:
+      'The key lesson is not whether the fictional outcome was favorable. The key lesson is whether your decision process was thoughtful, proportionate, and emotionally aware.',
+    primaryActionLabel: 'Restart Session',
+    nextSceneId: 'welcome',
   },
 ];

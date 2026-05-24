@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { sessionScenes, getDecisionReflection } from '@finsight-academy/shared';
+import {
+  getDecisionReflection,
+  getLessonSummary,
+  getMarketReaction,
+  sessionScenes,
+} from '@finsight-academy/shared';
 import { SessionSceneView } from './components/SessionSceneView';
 import { DecisionOptions } from './components/DecisionOptions';
 
@@ -48,13 +53,31 @@ function App() {
       ) : null}
 
       {currentScene === 'reflection' ? (
-      <section className="reflection-card">
-        <p className="reflection-label">Your selected response</p>
-        <p className="reflection-text">
-          {getDecisionReflection(selectedDecision)}
-        </p>
-      </section>
-    ) : null}
+        <section className="reflection-card">
+          <p className="reflection-label">Your selected response</p>
+          <p className="reflection-text">
+            {getDecisionReflection(selectedDecision)}
+          </p>
+        </section>
+      ) : null}
+
+      {currentScene === 'market-reaction' ? (
+        <section className="reflection-card">
+          <p className="reflection-label">Fictional market response</p>
+          <p className="reflection-text">
+            {getMarketReaction(selectedDecision)}
+          </p>
+        </section>
+      ) : null}
+
+      {currentScene === 'lesson-summary' ? (
+        <section className="reflection-card">
+          <p className="reflection-label">Your learning takeaway</p>
+          <p className="reflection-text">
+            {getLessonSummary(selectedDecision)}
+          </p>
+        </section>
+      ) : null}
     </main>
   );
 }
