@@ -109,60 +109,73 @@ export function PortfolioGameLoop() {
     setFeedback(null);
   }
 
-  return (
-    <main className="portfolio-game">
-      <section className="game-panel hero-panel">
-        <p className="eyebrow">Phase 1B Prototype</p>
-        <h1>Portfolio Game Loop MVP</h1>
-        <p>
-          Manage fictional learning credits, allocate across fictional assets,
-          face a market event, and review the consequence of your decision.
-        </p>
+    return (
+    <main className="game-stage">
+      <section className="academy-command">
+        <div>
+          <p className="eyebrow">Academy Simulation Deck</p>
+          <h1>Capital Trial: First Allocation</h1>
+          <p>
+            You are managing fictional academy credits inside a controlled
+            market simulation. Read the briefing, deploy your credits, then
+            observe how the event changes your position.
+          </p>
+        </div>
+
+        <div className="resource-orb">
+          <span>Available Credits</span>
+          <strong>{formatCredits(portfolio.cash)}</strong>
+        </div>
       </section>
 
-      <section className="game-panel">
-        <h2>Market Briefing</h2>
-        <p>
-          The academy simulation opens with a calm but uncertain market. Food
-          infrastructure looks stable, consumer technology is sensitive to news,
-          and clean energy carries higher uncertainty.
-        </p>
-        <p className="resource-line">
-          Starting cash: <strong>{formatCredits(portfolio.cash)}</strong>
-        </p>
+      <section className="briefing-scroll">
+        <div className="briefing-icon">◆</div>
+        <div>
+          <p className="eyebrow">Market Briefing</p>
+          <h2>Three sectors are moving under uncertainty</h2>
+          <p>
+            Food infrastructure looks steady, consumer technology is sensitive
+            to sudden news, and clean energy carries higher uncertainty. Your
+            task is not to guess perfectly; your task is to build a decision
+            that can survive surprise.
+          </p>
+        </div>
       </section>
 
       {status === 'allocation' && (
-        <section className="game-panel">
-          <h2>Allocation Decision</h2>
-          <p>
-            Choose how many fictional credits to allocate. You do not need to
-            spend everything; keeping cash can protect flexibility.
-          </p>
+        <section className="simulation-board">
+          <div className="board-header">
+            <div>
+              <p className="eyebrow">Allocation Phase</p>
+              <h2>Deploy your fictional credits</h2>
+            </div>
+            <p>
+              You may keep credits undeployed. Cash is not exciting, but it can
+              protect flexibility.
+            </p>
+          </div>
 
-          <div className="asset-grid">
+          <div className="asset-deck">
             {starterAssets.map((asset) => (
-              <article className="asset-card" key={asset.id}>
-                <div>
-                  <h3>{asset.name}</h3>
-                  <p className="muted">{asset.sector}</p>
+              <article className="asset-token" key={asset.id}>
+                <div className="asset-token-top">
+                  <span className={`risk-badge risk-${asset.riskLevel}`}>
+                    {asset.riskLevel} risk
+                  </span>
+                  <span className="asset-price">
+                    {formatCredits(asset.startingPrice)}
+                  </span>
                 </div>
 
-                <p>{asset.description}</p>
+                <div>
+                  <h3>{asset.name}</h3>
+                  <p className="asset-sector">{asset.sector}</p>
+                </div>
 
-                <dl className="asset-stats">
-                  <div>
-                    <dt>Risk</dt>
-                    <dd>{asset.riskLevel}</dd>
-                  </div>
-                  <div>
-                    <dt>Price</dt>
-                    <dd>{formatCredits(asset.startingPrice)}</dd>
-                  </div>
-                </dl>
+                <p className="asset-lore">{asset.description}</p>
 
-                <label className="allocation-label">
-                  Allocate credits
+                <label className="credit-control">
+                  <span>Credit deployment</span>
                   <input
                     min="0"
                     type="number"
@@ -177,71 +190,83 @@ export function PortfolioGameLoop() {
             ))}
           </div>
 
-          <div className="decision-summary">
-            <p>
-              Allocated:{' '}
-              <strong>{formatCredits(Math.max(totalAllocated, 0))}</strong>
-            </p>
-            <p>
-              Cash preview:{' '}
-              <strong>{formatCredits(remainingCashPreview)}</strong>
-            </p>
+          <div className="command-footer">
+            <div className="credit-meter">
+              <div>
+                <span>Deployed</span>
+                <strong>{formatCredits(Math.max(totalAllocated, 0))}</strong>
+              </div>
+              <div>
+                <span>Reserve</span>
+                <strong>{formatCredits(remainingCashPreview)}</strong>
+              </div>
+            </div>
+
+            <button type="button" onClick={runMarketEvent}>
+              Resolve Simulation
+            </button>
           </div>
 
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-          <button type="button" onClick={runMarketEvent}>
-            Run Market Event
-          </button>
+          {errorMessage && <p className="error-rune">{errorMessage}</p>}
         </section>
       )}
 
       {status === 'result' && result && feedback && (
         <>
-          <section className="game-panel event-panel">
-            <p className="eyebrow">Market Event</p>
+          <section className="event-reveal">
+            <p className="eyebrow">Market Event Revealed</p>
             <h2>{starterMarketEvent.title}</h2>
             <p>{starterMarketEvent.description}</p>
-            <p className="muted">{starterMarketEvent.educationalConcept}</p>
+            <small>{starterMarketEvent.educationalConcept}</small>
           </section>
 
-          <section className="game-panel">
-            <h2>Portfolio Result</h2>
+          <section className="simulation-board">
+            <div className="board-header">
+              <div>
+                <p className="eyebrow">Simulation Result</p>
+                <h2>Your portfolio after the event</h2>
+              </div>
+              <p>
+                The result is not a grade. It is evidence about how your
+                allocation handled uncertainty.
+              </p>
+            </div>
 
-            <div className="result-grid">
+            <div className="score-strip">
               <article>
-                <span>Starting value</span>
+                <span>Start</span>
                 <strong>{formatCredits(result.startingValue)}</strong>
               </article>
               <article>
-                <span>Final value</span>
+                <span>End</span>
                 <strong>{formatCredits(result.finalValue)}</strong>
               </article>
               <article>
-                <span>Change</span>
+                <span>Shift</span>
                 <strong>{formatCredits(result.change)}</strong>
               </article>
               <article>
-                <span>Change percent</span>
+                <span>Momentum</span>
                 <strong>{result.changePercent.toFixed(2)}%</strong>
               </article>
             </div>
 
-            <div className="holding-breakdown">
+            <div className="asset-outcome-list">
               {result.holdingResults.map((holding) => {
                 const asset = starterAssets.find(
                   (item) => item.id === holding.assetId,
                 );
 
                 return (
-                  <article key={holding.assetId} className="holding-row">
+                  <article key={holding.assetId} className="asset-outcome">
                     <div>
                       <strong>{asset?.name ?? holding.assetId}</strong>
-                      <p className="muted">
-                        Quantity: {holding.quantity.toFixed(2)}
+                      <p>
+                        Quantity controlled: {holding.quantity.toFixed(2)}
                       </p>
                     </div>
-                    <div>
+
+                    <div className="value-shift">
                       <span>{formatCredits(holding.startingValue)}</span>
                       <span>→</span>
                       <strong>{formatCredits(holding.finalValue)}</strong>
@@ -252,8 +277,8 @@ export function PortfolioGameLoop() {
             </div>
           </section>
 
-          <section className="game-panel feedback-panel">
-            <p className="eyebrow">Coach Feedback</p>
+          <section className="coach-terminal">
+            <p className="eyebrow">Academy Coach</p>
             <h2>{feedback.title}</h2>
             <p>{feedback.message}</p>
 
@@ -264,7 +289,7 @@ export function PortfolioGameLoop() {
             </div>
 
             <button type="button" onClick={restartLoop}>
-              Restart Loop
+              Replay Trial
             </button>
           </section>
         </>
