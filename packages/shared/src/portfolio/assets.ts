@@ -7,6 +7,7 @@ export const starterAssets: Asset[] = [
     sector: 'Food Infrastructure',
     riskLevel: 'low',
     startingPrice: 50,
+    currentPrice: 50,
     description:
       'A steady fictional food logistics company with lower growth but stable demand.',
   },
@@ -16,6 +17,7 @@ export const starterAssets: Asset[] = [
     sector: 'Consumer Technology',
     riskLevel: 'medium',
     startingPrice: 80,
+    currentPrice: 80,
     description:
       'A fictional electronics producer that can grow quickly but reacts strongly to market news.',
   },
@@ -25,6 +27,7 @@ export const starterAssets: Asset[] = [
     sector: 'Clean Energy',
     riskLevel: 'high',
     startingPrice: 40,
+    currentPrice: 40,
     description:
       'A fictional clean energy startup with high uncertainty and high possible movement.',
   },

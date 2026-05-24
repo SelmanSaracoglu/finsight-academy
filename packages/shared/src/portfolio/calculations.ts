@@ -10,7 +10,7 @@ export function calculateHoldingValue(
     return 0;
   }
 
-  return holding.quantity * asset.startingPrice;
+  return holding.quantity * asset.currentPrice;
 }
 
 export function calculateHoldingsValue(
