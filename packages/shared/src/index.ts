@@ -1,3 +1,5 @@
+export * from './portfolio';
+
 export type { SceneId, SessionScene } from './session';
 export { getSceneProgress, sessionScenes } from './session';
 
