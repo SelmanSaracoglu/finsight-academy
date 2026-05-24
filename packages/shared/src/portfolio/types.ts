@@ -69,3 +69,9 @@ export type PortfolioResult = {
   cash: number;
   holdingResults: HoldingResult[];
 };
+
+export type CoachingFeedback = {
+  title: string;
+  message: string;
+  tags: string[];
+};

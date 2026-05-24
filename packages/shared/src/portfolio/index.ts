@@ -4,6 +4,7 @@ export type {
   AllocationResult,
   Asset,
   AssetImpact,
+  CoachingFeedback,
   Holding,
   HoldingResult,
   MarketEvent,
@@ -26,5 +27,6 @@ export {
 } from './calculations';
 
 export { createStarterPortfolio } from './createStarterPortfolio';
-
 export { calculatePortfolioResult } from './calculatePortfolioResult';
+export { generateCoachingFeedback } from './generateCoachingFeedback';
+
