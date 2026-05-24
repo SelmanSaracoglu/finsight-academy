@@ -38,6 +38,36 @@ button:hover {
   padding: 36px 0 56px;
 }
 
+.trial-hud {
+  display: grid;
+  grid-template-columns: 160px 190px minmax(0, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.trial-hud div {
+  padding: 14px 16px;
+  border: 1px solid rgba(49, 72, 95, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 10px 26px rgba(35, 50, 70, 0.08);
+}
+
+.trial-hud span {
+  display: block;
+  margin-bottom: 5px;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.trial-hud strong {
+  color: #1f2933;
+  font-size: 0.94rem;
+}
+
 .academy-command {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 260px;
@@ -363,6 +393,58 @@ button:hover {
   font-size: 1.2rem;
 }
 
+.rival-benchmark {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) 220px minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+  margin-bottom: 22px;
+  padding: 16px;
+  border: 1px solid rgba(49, 72, 95, 0.14);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(49, 72, 95, 0.08), rgba(139, 161, 113, 0.1));
+}
+
+.rival-benchmark h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.rival-benchmark p {
+  margin: 8px 0 0;
+  color: #475569;
+  line-height: 1.55;
+}
+
+.benchmark-score,
+.benchmark-standing {
+  display: grid;
+  align-content: center;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.64);
+}
+
+.benchmark-score span {
+  margin-bottom: 6px;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.benchmark-score strong,
+.benchmark-standing strong {
+  font-size: 1.05rem;
+}
+
+.benchmark-standing p {
+  margin-top: 8px;
+  font-size: 0.92rem;
+}
+
 .asset-outcome-list {
   display: grid;
   gap: 12px;
@@ -414,10 +496,12 @@ button:hover {
 }
 
 @media (max-width: 900px) {
+  .trial-hud
   .academy-command,
   .briefing-scroll,
   .asset-deck,
-  .score-strip {
+  .score-strip,
+  .rival-benchmark {
     grid-template-columns: 1fr;
   }
 

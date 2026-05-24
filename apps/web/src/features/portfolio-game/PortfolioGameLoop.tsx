@@ -57,6 +57,25 @@ export function PortfolioGameLoop() {
   }, [allocationInputs]);
 
   const remainingCashPreview = portfolio.cash - totalAllocated;
+  const currentPhaseLabel = 
+    status === 'allocation' ? 'Allocation Phase' : 'Result Phase';
+
+  const currentObjective =
+    status === 'allocation'
+      ? 'Deploy credits while keeping risk and flexibility in mind.'
+      : 'Review how your allocation handled the market event.';
+
+  const rivalBenchmarkValue = 1002;
+
+  const rivalStanding =
+    result && result.finalValue >= rivalBenchmarkValue
+      ? 'Ahead of the academy benchmark'
+      : 'Behind the academy benchmark';
+
+  const rivalStandingHint =
+    result && result.finalValue >= rivalBenchmarkValue
+      ? 'Your allocation handled this event slightly better than the fictional benchmark portfolio.'
+      : 'The fictional benchmark handled this event better. Review whether your allocation was too concentrated or too exposed.';
 
   function updateAllocationInput(assetId: string, value: string) {
     setAllocationInputs((currentInputs) => ({
@@ -111,6 +130,23 @@ export function PortfolioGameLoop() {
 
     return (
     <main className="game-stage">
+      <section className="trial-hud">
+        <div>
+          <span>Trial 01</span>
+          <strong>Capital Allocation</strong>
+        </div>
+
+        <div>
+          <span>Current Phase</span>
+          <strong>{currentPhaseLabel}</strong>
+        </div>
+
+        <div>
+          <span>Objective</span>
+          <strong>{currentObjective}</strong>
+        </div>
+      </section>
+
       <section className="academy-command">
         <div>
           <p className="eyebrow">Academy Simulation Deck</p>
@@ -249,6 +285,27 @@ export function PortfolioGameLoop() {
                 <span>Momentum</span>
                 <strong>{result.changePercent.toFixed(2)}%</strong>
               </article>
+            </div>
+
+            <div className="rival-benchmark">
+              <div>
+                <p className="eyebrow">Fictional Rival Benchmark</p>
+                <h3>Northbridge Academy Portfolio</h3>
+                <p>
+                  A simulated rival portfolio used only for local practice. It
+                  is not a real leaderboard.
+                </p>
+              </div>
+
+              <div className="benchmark-score">
+                <span>Benchmark End Value</span>
+                <strong>{formatCredits(rivalBenchmarkValue)}</strong>
+              </div>
+
+              <div className="benchmark-standing">
+                <strong>{rivalStanding}</strong>
+                <p>{rivalStandingHint}</p>
+              </div>
             </div>
 
             <div className="asset-outcome-list">
